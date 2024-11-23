@@ -1,37 +1,52 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { Provider } from 'react-redux';
+import store from '@/reducer/store';
+import { firebaseConfig } from '@/firebase-config';
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
+const RootLayout = () => {
+  
+  const firebaseApp = initializeApp(firebaseConfig);
+  const auth = getAuth(firebaseApp);
+    console.log("pepito",auth);
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <Provider store={store}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+        <Stack.Screen
+          name="index"
+          options={{
+            headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitle,
+            title: 'Inicio sesión',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="register"
+          options={{
+            headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitle,
+            title: 'Registro',
+            headerTitleAlign: 'center',
+            headerTintColor: 'white',
+          }}
+        />
       </Stack>
-    </ThemeProvider>
+    </Provider>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: 'black',
+  },
+  headerTitle: {
+    flex: 1,
+    color: 'white',
+  },
+});
+
+export default RootLayout;
