@@ -43,7 +43,7 @@ import { string } from 'yup';
     padding: 0,
   },
   welcomeText: {
-    fontSize: 24,
+    
  
   },
   formContainer: {
