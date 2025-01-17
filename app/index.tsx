@@ -10,9 +10,15 @@ import { useDispatch } from 'react-redux';
 import { User } from '@/reducer/userReducer';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { string } from 'yup';
+import NoteBlog from '@/components/noteBlog';
+import { TextInput } from 'react-native-paper';
+import FormSignUp from '@/components/formSingUp';
+import {  Button } from 'react-native';
+import { useRouter } from 'expo-router';
 
 
   const Home = () => {
+    const router = useRouter();
     const dispatch = useDispatch();
     const { users, user } = useSelector((state: RootState) => state.users);
     const auth = getAuth();
@@ -32,7 +38,11 @@ import { string } from 'yup';
   };
   return (
     <View style={styles.container}>
-        <FormLogIn handleSignIn={handleSignIn} />
+         {/* <Text>Bienvenido a la pantalla de Inicio</Text>
+         <Button title="Ir a Registro" onPress={() => router.push('/register')} /> */}
+      {/* <NoteBlog/> */}
+      <FormSignUp/> 
+      {/* <FormLogIn handleSignIn={handleSignIn}/> */}
     </View>
     );
   }
@@ -57,3 +67,5 @@ import { string } from 'yup';
   });
 
   export default Home;
+
+  

@@ -24,7 +24,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
     return (
       <LinearGradient colors={['#FF6B6B', '#4ECDC4']} style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#FFFFFF" />
-        <Text style={styles.loadingText}>Summoning Dragon Ball characters...</Text>
+        <Text style={styles.loadingText}>Cargando personales de dragon Ball...</Text>
       </LinearGradient>
     )
   }
@@ -57,11 +57,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
             style={styles.header}
           >
             <Icon name="account-circle" size={64} color="#FFFFFF" style={styles.userIcon} />
-            <Text style={styles.welcomeText}>Welcome, {user?.username}!</Text>
+            <Text style={styles.welcomeText}>Bienvenido, {user?.username}!</Text>
             <Text style={styles.emailText}>{user?.email}</Text>
           </LinearGradient>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Dragon Ball Characters</Text>
+            <Text style={styles.title}>Dragon Ball Personajes</Text>
           </View>
           <View style={styles.cardContainer}>
             {data?.items.map((character: Character) => (
